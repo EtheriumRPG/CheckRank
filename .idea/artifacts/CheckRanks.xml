@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CheckRanks">
+    <output-path>$USER_HOME$/Desktop/mine-srv/MisPlugins</output-path>
+    <root id="archive" name="CheckRanks.jar">
+      <element id="module-output" name="CheckRank" />
+      <element id="library" level="project" name="Maven: nl.svenar:powerranks:1.10.9" />
+    </root>
+  </artifact>
+</component>
