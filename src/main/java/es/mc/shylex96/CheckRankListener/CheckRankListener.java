@@ -72,12 +72,12 @@ public class CheckRankListener implements Listener {
                 @Override
                 public void run() {
                     Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), rankCommand);
-//                    Bukkit.getConsoleSender().sendMessage("Comando ejecutado: " + rankCommand);
+                    // Bukkit.getConsoleSender().sendMessage("Comando ejecutado: " + rankCommand);
                 }
-            }.runTaskLater(powerRanks, 100L); // 1 tick (20ms) - 1000 tickets (1s)
+            }.runTaskLater(powerRanks, 100L); //> 1 tick (20ms) - 1000 tickets (1s)
 
         } else {
-//            Bukkit.getConsoleSender().sendMessage("El jugador " + player.getName() + " no tiene un rango que requiera el comando.");
+            // Bukkit.getConsoleSender().sendMessage("El jugador " + player.getName() + " no tiene un rango que requiera el comando.");
         }
     }
 
@@ -128,7 +128,7 @@ public class CheckRankListener implements Listener {
     private boolean hasMovedSignificantly(double x, double y, double z) {
         // Verificar si el jugador se ha movido más allá de una tolerancia mínima (no movimiento de cámara únicamente)
         if (Math.abs(x - lastX) > toleranceX || Math.abs(y - lastY) > toleranceY || Math.abs(z - lastZ) > toleranceZ) {
-            // Actualiza las coordenadas anteriores
+            // Actualizar las coordenadas anteriores
             lastX = x;
             lastY = y;
             lastZ = z;
@@ -168,7 +168,7 @@ public class CheckRankListener implements Listener {
     }
 
     private boolean hasRankOrHigher(UUID playerUUID, String requiredRank) {
-        // Obtén el rango del jugador
+        // Obtener el rango del jugador
         Set<PRPlayerRank> playerRanks = playersAPI.getRanks(playerUUID);
 
         if (playerRanks.isEmpty()) {
@@ -193,7 +193,7 @@ public class CheckRankListener implements Listener {
             return false;
         }
 
-        // Comprueba si el jugador tiene el rango requerido o superior
+        // Comprobar si el jugador tiene el rango requerido o superior
         // Bukkit.getConsoleSender().sendMessage("Result: " + (playerRankIndex >= requiredRankIndex));
         return playerRankIndex >= requiredRankIndex;
 
