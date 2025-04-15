@@ -88,8 +88,8 @@ public class CheckRankListener implements Listener {
             case "Héroe" -> "ca grantimpossible " + player.getName() + " 1 server_quest.rank2";
             case "Semidiós" -> "ca grantimpossible " + player.getName() + " 1 server_quest.rank3";
             case "Dios_Mayor" -> "ca grantimpossible " + player.getName() + " 1 server_quest.rank4";
-            case "Dios_Supremo" -> "ca grantimpossible " + player.getName() + " 1 server_quest.rank5";
-            case "Protogenos" -> "ca grantimpossible " + player.getName() + " 1 server_quest.rank6";
+            case "Titán" -> "ca grantimpossible " + player.getName() + " 1 server_quest.rank5";
+            case "Primordial" -> "ca grantimpossible " + player.getName() + " 1 server_quest.rank6";
             case "Eternum" -> "ca grantimpossible " + player.getName() + " 1 server_quest.rank7";
             default -> null;
         };
