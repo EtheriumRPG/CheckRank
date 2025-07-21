@@ -60,8 +60,9 @@ public class CheckRankListener implements Listener {
             return;
         }
 
-        PRPlayerRank playerRankObject = playerRanks.iterator().next();
-        String playerRank = playerRankObject.getName();
+        // PRPlayerRank playerRankObject = playerRanks.iterator().next();
+        // String playerRank = playerRankObject.getName();
+        String playerRank = getHighestRank(playerRanks);
 
         // Mapeo de rangos específicos con su número correspondiente
         String rankCommand = getRankCommand(playerRank, player);
@@ -93,6 +94,14 @@ public class CheckRankListener implements Listener {
             case "Eternum" -> "ca grantimpossible " + player.getName() + " 1 server_quest.rank7";
             default -> null;
         };
+    }
+
+    private String getHighestRank(Set<PRPlayerRank> ranks) {
+        return ranks.stream()
+                .map(PRPlayerRank::getName)
+                .filter(rankList::contains)
+                .max((r1, r2) -> Integer.compare(rankList.indexOf(r1), rankList.indexOf(r2)))
+                .orElse(null);
     }
 
     @EventHandler
