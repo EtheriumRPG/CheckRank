@@ -52,7 +52,7 @@ public class CheckRankListener implements Listener {
         Player player = event.getPlayer();
         UUID playerUUID = player.getUniqueId();
 
-        // Obtener el rango del jugador
+        // Obtener todos los rangos del jugador
         Set<PRPlayerRank> playerRanks = playersAPI.getRanks(playerUUID);
 
         if (playerRanks.isEmpty()) {
@@ -60,28 +60,34 @@ public class CheckRankListener implements Listener {
             return;
         }
 
-        // PRPlayerRank playerRankObject = playerRanks.iterator().next();
-        // String playerRank = playerRankObject.getName();
-        String playerRank = getHighestRank(playerRanks);
+        // Recorrer los rangos del jugador
+        int delay = 0;
+        for (PRPlayerRank rank : playerRanks) {
+            String rankName = rank.getName();
 
-        // Mapeo de rangos específicos con su número correspondiente
-        String rankCommand = getRankCommand(playerRank, player);
+            // Verificar si ese rango está en la lista con logros asociados
+            if (rankList.contains(rankName)) {
+                int index = rankList.indexOf(rankName);
 
-        if (rankCommand != null) {
-            // Ejecutar el comando con un retraso de 1 tick
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), rankCommand);
-                    // Bukkit.getConsoleSender().sendMessage("Comando ejecutado: " + rankCommand);
+                // Solo asignar logros a partir de Héroe (index 11) hasta Eternum (index 20)
+                if (index >= 11 && index <= 20) {
+                    String advancementId = "server_quest.rank" + (index - 9);
+
+                    // Ejecutar el comando con retraso
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            Bukkit.getServer().dispatchCommand(
+                                    Bukkit.getConsoleSender(),
+                                    "ca grantimpossible " + player.getName() + " 1 " + advancementId
+                            );
+                        }
+                    }.runTaskLater(powerRanks, 100L); // Retraso de 5 segundos (100 ticks)
+                    delay += 20L;
                 }
-            }.runTaskLater(powerRanks, 100L); //> 1 tick (20ms) - 1000 tickets (1s)
-
-        } else {
-            // Bukkit.getConsoleSender().sendMessage("El jugador " + player.getName() + " no tiene un rango que requiera el comando.");
+            }
         }
     }
-
 
     private String getRankCommand(String playerRank, Player player) {
         // Lista de rangos específicos para permiso según logros
@@ -122,7 +128,7 @@ public class CheckRankListener implements Listener {
             // Case para las coordenadas
             switch (getCoordinateCase(x, y, z)) {
                 case "case1":
-                    handleTeleportation(player, "Comandante", new Location(player.getWorld(), 5342.500, 170.000, -456.500), tier_2_combat_zone_name);
+                    handleTeleportation(player, "Comandante", new Location(player.getWorld(), 5341.500, 170.000, -456.500), tier_2_combat_zone_name);
                     break;
                 case "case2":
                     // handleTeleportation(player, "Comandante", new Location(player.getWorld(), 5342, 170, -457), tier_2_combat_zone_name);
