@@ -128,7 +128,7 @@ public class CheckRankListener implements Listener {
             // Case para las coordenadas
             switch (getCoordinateCase(x, y, z)) {
                 case "case1":
-                    handleTeleportation(player, "Comandante", new Location(player.getWorld(), 5341.500, 170.000, -456.500), tier_2_combat_zone_name);
+                    handleTeleportation(player, "Comandante", new Location(player.getWorld(), 15073.500, -21.000, -830.500, 120, 12), tier_2_combat_zone_name);
                     break;
                 case "case2":
                     // handleTeleportation(player, "Comandante", new Location(player.getWorld(), 5342, 170, -457), tier_2_combat_zone_name);
