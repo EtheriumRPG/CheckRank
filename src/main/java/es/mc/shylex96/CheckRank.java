@@ -29,7 +29,7 @@ public class CheckRank extends JavaPlugin {
         // Registrar los listeners de eventos solo una vez
         getServer().getPluginManager().registerEvents(new CheckRankListener(powerRanks), this);
         getServer().getPluginManager().registerEvents(new CheckRankListener(powerRanks), this);
-        getServer().getPluginManager().registerEvents(new TeleportRestrictionListener(powerRanks), this);
+        getServer().getPluginManager().registerEvents(new TeleportRestrictionListener(this, powerRanks), this);
     }
 
     @Override

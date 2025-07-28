@@ -9,17 +9,20 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
 
 public class TeleportRestrictionListener implements Listener {
 
+    private final JavaPlugin plugin; // ✅ referencia al plugin principal
     private final PowerRanks powerRanks;
     private final PlayersAPI playersAPI;
     private final List<String> rankList;
     private final List<RestrictedZone> restrictedZones = new ArrayList<>();
 
-    public TeleportRestrictionListener(PowerRanks powerRanks) {
+    public TeleportRestrictionListener(JavaPlugin plugin, PowerRanks powerRanks) {
+        this.plugin = plugin;
         this.powerRanks = powerRanks;
         this.playersAPI = new PlayersAPI();
 
@@ -43,7 +46,7 @@ public class TeleportRestrictionListener implements Listener {
                 1.5, 1.5, 1.5
         ));
 
-        // añadir más zonas...
+        // Agregar más zonas...
     }
 
     @EventHandler
@@ -57,11 +60,13 @@ public class TeleportRestrictionListener implements Listener {
             if (zone.isInside(to)) {
                 if (!hasRankOrHigher(player.getUniqueId(), zone.requiredRank)) {
                     event.setCancelled(true);
-                    player.sendMessage("§cNo tienes el rango necesario para acceder a §6" + zone.name + "§c. " +
-                            "Se requiere el rango §6" + zone.requiredRank + "§c o superior.");
+
+                    Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                        player.sendMessage("§cNo tienes el rango necesario para acceder a §6" + zone.name + "§c. " +
+                                "Se requiere el rango §6" + zone.requiredRank + "§c o superior.");
+                    }, 1L);
+
                     return;
-                } else {
-                    player.sendMessage("§7Has entrado en §6" + zone.name + "§7.");
                 }
             }
         }
