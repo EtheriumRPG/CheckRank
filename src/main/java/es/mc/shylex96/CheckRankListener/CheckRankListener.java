@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
@@ -89,6 +90,7 @@ public class CheckRankListener implements Listener {
         }
     }
 
+    /*
     private String getRankCommand(String playerRank, Player player) {
         // Lista de rangos específicos para permiso según logros
         return switch (playerRank) {
@@ -101,6 +103,7 @@ public class CheckRankListener implements Listener {
             default -> null;
         };
     }
+    */
 
     private String getHighestRank(Set<PRPlayerRank> ranks) {
         return ranks.stream()

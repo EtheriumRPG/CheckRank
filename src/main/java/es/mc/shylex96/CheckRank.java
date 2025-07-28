@@ -1,6 +1,7 @@
 package es.mc.shylex96;
 
 import es.mc.shylex96.CheckRankListener.CheckRankListener;
+import es.mc.shylex96.TeleportRestrictionListener.TeleportRestrictionListener;
 import nl.svenar.powerranks.bukkit.PowerRanks;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,7 +28,8 @@ public class CheckRank extends JavaPlugin {
 
         // Registrar los listeners de eventos solo una vez
         getServer().getPluginManager().registerEvents(new CheckRankListener(powerRanks), this);
-
+        getServer().getPluginManager().registerEvents(new CheckRankListener(powerRanks), this);
+        getServer().getPluginManager().registerEvents(new TeleportRestrictionListener(powerRanks), this);
     }
 
     @Override
